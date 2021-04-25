@@ -94,7 +94,7 @@ def split_by_seconds(filename, split_length, vcodec="copy", acodec="copy",
     split_count = ceildiv(video_length, split_length)
     if(split_count == 1):
         print("Video length is less then the target split length.")
-        raise SystemExit
+        return [filename]
 
     split_cmd = ["ffmpeg", "-i", filename, "-vcodec", vcodec, "-acodec", acodec] + shlex.split(extra)
     try:
