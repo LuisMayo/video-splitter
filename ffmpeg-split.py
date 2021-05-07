@@ -76,7 +76,6 @@ def get_video_length(filename):
 
     output = subprocess.check_output(("ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", filename)).strip()
     video_length = int(float(output))
-    print("Video length in seconds: "+str(video_length))
 
     return video_length
 
@@ -93,7 +92,6 @@ def split_by_seconds(filename, split_length, vcodec="copy", acodec="copy",
         video_length = get_video_length(filename)
     split_count = ceildiv(video_length, split_length)
     if(split_count == 1):
-        print("Video length is less then the target split length.")
         return [filename]
 
     split_cmd = ["ffmpeg", "-i", filename, "-vcodec", vcodec, "-acodec", acodec] + shlex.split(extra)
